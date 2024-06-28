@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.tilelayer.nogap/dist/leaflet.tilelayer.nogap.js"></script>
     <style>
         body, html, #map { height: 100%; margin: 0; padding: 0; }
     </style>
@@ -15,28 +14,25 @@
     <div id="map"></div>
     <script>
         var map = L.map('map', {
-            center: [0, 0],
-            zoom: 2,
+            center: [4.6097, -74.0817],  // Coordenadas de Bogotá
+            zoom: 10,
             zoomControl: false,
             attributionControl: false
         });
 
-        fetch('distritos.geojson')
+        fetch('distritos.geojson')  // Reemplaza con el nombre real de tu archivo
             .then(response => response.json())
             .then(data => {
-                var geoJsonLayer = L.geoJSON(data, {
+                L.geoJSON(data, {
                     style: function (feature) {
                         return {color: "red", weight: 2, fillOpacity: 0.4};
                     }
                 }).addTo(map);
-
-                map.fitBounds(geoJsonLayer.getBounds());
-
-                var tileLayer = L.tileLayer.noGap('', {
-                    maxZoom: 19,
-                    noWrap: true
-                }).addTo(map);
             });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
     </script>
 </body>
 </html>
