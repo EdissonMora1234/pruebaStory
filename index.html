@@ -21,7 +21,7 @@
         }).addTo(map);
 
         // Añadir la capa de puntos
-        fetch('salas.geojson')
+        fetch('https://EdissonMora1234.github.io/pruebaStory/salas.geojson')
             .then(response => response.json())
             .then(data => {
                 L.geoJSON(data, {
@@ -36,10 +36,11 @@
                         });
                     }
                 }).addTo(map);
-            });
+            })
+            .catch(error => console.error('Error al cargar la capa de puntos:', error));
 
         // Añadir la capa de polígonos
-        fetch('distritos.geojson')
+        fetch('https://EdissonMora1234.github.io/pruebaStory/distritos.geojson')
             .then(response => response.json())
             .then(data => {
                 L.geoJSON(data, {
@@ -52,7 +53,8 @@
                         };
                     }
                 }).addTo(map);
-            });
+            })
+            .catch(error => console.error('Error al cargar la capa de polígonos:', error));
     </script>
 </body>
 </html>
