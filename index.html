@@ -43,7 +43,7 @@
         fetch('https://EdissonMora1234.github.io/pruebaStory/distritos.geojson')
             .then(response => response.json())
             .then(data => {
-                var layer = L.geoJSON(data, {
+                var polygonLayer = L.geoJSON(data, {
                     style: function (feature) {
                         return {
                             color: "#ff7800",
@@ -53,7 +53,9 @@
                         };
                     }
                 }).addTo(map);
-                map.fitBounds(layer.getBounds());
+
+                // Ajustar el mapa a la extensión de los polígonos
+                map.fitBounds(polygonLayer.getBounds());
             })
             .catch(error => console.error('Error al cargar la capa de polígonos:', error));
     </script>
